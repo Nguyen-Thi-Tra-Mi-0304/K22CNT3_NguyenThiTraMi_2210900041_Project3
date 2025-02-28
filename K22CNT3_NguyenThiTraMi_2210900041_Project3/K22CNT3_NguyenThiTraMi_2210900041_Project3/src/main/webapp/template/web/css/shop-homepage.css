@@ -1,0 +1,81 @@
+
+body {
+  padding-top: 80px;
+}
+.main-content {
+    margin-top: 80px; /* Ä�iá»�u chá»‰nh theo chiá»�u cao cá»§a header */
+}
+
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.pagination {
+  margin-bottom: 30px;
+}
+
+.navbar-brand span:last-child {
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-brand:hover span:last-child {
+    color: yellow; /* Khi hover, mÃ u "TrÃ­ Tuá»‡" Ä‘á»•i sang vÃ ng */
+}
+
+
+/* Điều chỉnh lại phần hình ảnh */
+.carousel-item img {
+    max-width: 75%; /* Giảm kích thước ảnh xuống */
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: auto;
+}
+
+/* Căn chỉnh lại phần nội dung để không bị đè */
+.carousel-item .col-md-6:first-child {
+    padding-left: 60px;
+    z-index: 2; /* Đảm bảo nội dung luôn hiển thị phía trên */
+    position: relative;
+}
+
+/* Điều chỉnh nút điều hướng để không đè lên nội dung */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 6%; /* Giảm kích thước vùng bấm */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev {
+    left: -70px; /* Đẩy ra xa hơn */
+}
+
+.carousel-control-next {
+    right: -70px; /* Đẩy ra xa hơn */
+}
+
+/* Làm cho icon điều hướng nhỏ gọn hơn */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+
