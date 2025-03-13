@@ -26,9 +26,11 @@ public class AuthorizationFilter implements Filter {
         String loginURI = request.getContextPath() + "/admin/signin";
         String admin401URI = request.getContextPath() + "/admin/401";
 
+        // kiểm tra session != null
         Optional<String> userRole = Optional.ofNullable(session)
                 .map(s -> (User) s.getAttribute("currentUser"))
                 .map(User::getRole);
+
 
         boolean isAdmin = userRole.map("ADMIN"::equals).orElse(false);
         boolean isEmployee = userRole.map("EMPLOYEE"::equals).orElse(false);

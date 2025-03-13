@@ -16,8 +16,7 @@ import java.util.Optional;
 
 @WebServlet(name = "CategoryManagerServlet", value = "/admin/categoryManager")
 public class CategoryManagerServlet extends HttpServlet {
-    private final CategoryService categoryService = new CategoryService();
-
+    private final  CategoryService categoryService = new CategoryService();
     private static final int CATEGORIES_PER_PAGE = 5;
 
     @Override
