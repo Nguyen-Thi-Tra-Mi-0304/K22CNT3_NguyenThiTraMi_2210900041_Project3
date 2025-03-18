@@ -35,7 +35,7 @@ public class ProductReviewDetailServlet extends HttpServlet {
             Protector.of(() -> productService.getById(productReview.getProductId())).get(Optional::empty)
                     .ifPresent(productReview::setProduct);
             request.setAttribute("productReview", productReview);
-            request.getRequestDispatcher("/WEB-INF/views/productReviewDetailView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/review/productReviewDetailView.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/reviewManager");
         }

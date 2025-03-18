@@ -33,7 +33,7 @@ public class ProductDetailServlet extends HttpServlet {
 
             request.setAttribute("product", product);
             request.setAttribute("category", categoryFromServer.orElseGet(Category::new));
-            request.getRequestDispatcher("/WEB-INF/views/productDetailView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/product/productDetailView.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/productManager");
         }

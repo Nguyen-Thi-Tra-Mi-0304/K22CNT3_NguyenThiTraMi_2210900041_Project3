@@ -30,7 +30,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("totalCategories", totalCategories);
         request.setAttribute("totalProducts", totalProducts);
         request.setAttribute("totalOrders", totalOrders);
-        request.getRequestDispatcher("/WEB-INF/views/adminView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/adminView.jsp").forward(request, response);
     }
 
     @Override

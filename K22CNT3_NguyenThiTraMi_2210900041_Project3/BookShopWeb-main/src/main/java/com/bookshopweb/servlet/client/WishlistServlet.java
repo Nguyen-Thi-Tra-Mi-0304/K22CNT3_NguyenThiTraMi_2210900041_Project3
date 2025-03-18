@@ -42,7 +42,7 @@ public class WishlistServlet extends HttpServlet {
             request.setAttribute("wishlistItems", wishlistItems);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/wishlistView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/user/wishlistView.jsp").forward(request, response);
     }
 
     @Override

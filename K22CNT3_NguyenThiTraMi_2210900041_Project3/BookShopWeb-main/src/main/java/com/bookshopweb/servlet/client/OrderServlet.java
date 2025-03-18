@@ -85,7 +85,7 @@ public class OrderServlet extends HttpServlet {
             request.setAttribute("orders", orderResponses);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/orderView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/user/orderView.jsp").forward(request, response);
     }
 
     @Override

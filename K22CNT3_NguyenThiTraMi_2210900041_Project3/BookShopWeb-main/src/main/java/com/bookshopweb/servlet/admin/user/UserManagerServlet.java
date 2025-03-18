@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserManagerServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
-    private static final int USERS_PER_PAGE = 3;
+    private static final int USERS_PER_PAGE = 5;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +40,7 @@ public class UserManagerServlet extends HttpServlet {
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("page", page);
         request.setAttribute("users", users);
-        request.getRequestDispatcher("/WEB-INF/views/userManagerView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/user/userManagerView.jsp").forward(request, response);
     }
 
     @Override

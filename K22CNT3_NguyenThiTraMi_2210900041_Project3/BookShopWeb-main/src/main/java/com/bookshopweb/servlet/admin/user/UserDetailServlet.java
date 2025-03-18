@@ -23,7 +23,7 @@ public class UserDetailServlet extends HttpServlet {
 
         if (userFromServer.isPresent()) {
             request.setAttribute("user", userFromServer.get());
-            request.getRequestDispatcher("/WEB-INF/views/userDetailView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/user/userDetailView.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/userManager");
         }

@@ -42,7 +42,7 @@ public class EditProductReviewServlet extends HttpServlet {
                     .orElse(false);
             if (isExactUser) {
                 request.setAttribute("productReview", productReview);
-                request.getRequestDispatcher("/WEB-INF/views/editProductReviewView.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/web/review/editProductReviewView.jsp").forward(request, response);
             } else {
                 response.sendRedirect(request.getContextPath() + "/");
             }
@@ -87,6 +87,6 @@ public class EditProductReviewServlet extends HttpServlet {
         }
 
         request.setAttribute("productReview", productReview);
-        request.getRequestDispatcher("/WEB-INF/views/editProductReviewView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/review/editProductReviewView.jsp").forward(request, response);
     }
 }

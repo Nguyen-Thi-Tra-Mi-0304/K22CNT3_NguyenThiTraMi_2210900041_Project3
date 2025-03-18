@@ -50,7 +50,7 @@ public class SearchServlet extends HttpServlet {
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("page", page);
             request.setAttribute("products", products);
-            request.getRequestDispatcher("/WEB-INF/views/searchView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/web/searchView.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/");
         }

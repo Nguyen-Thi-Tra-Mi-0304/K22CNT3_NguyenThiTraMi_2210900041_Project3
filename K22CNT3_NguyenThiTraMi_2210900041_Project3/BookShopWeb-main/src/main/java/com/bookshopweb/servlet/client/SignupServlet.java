@@ -23,7 +23,7 @@ public class SignupServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/signupView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/signupView.jsp").forward(request, response);
     }
 
     @Override
@@ -109,6 +109,6 @@ public class SignupServlet extends HttpServlet {
             request.setAttribute("violations", violations);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/signupView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/signupView.jsp").forward(request, response);
     }
 }

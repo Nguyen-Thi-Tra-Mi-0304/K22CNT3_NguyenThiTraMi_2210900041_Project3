@@ -37,7 +37,7 @@ public class CreateProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Category> categories = Protector.of(categoryService::getAll).get(ArrayList::new);
         request.setAttribute("categories", categories);
-        request.getRequestDispatcher("/WEB-INF/views/createProductView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/product/createProductView.jsp").forward(request, response);
     }
 
     @Override

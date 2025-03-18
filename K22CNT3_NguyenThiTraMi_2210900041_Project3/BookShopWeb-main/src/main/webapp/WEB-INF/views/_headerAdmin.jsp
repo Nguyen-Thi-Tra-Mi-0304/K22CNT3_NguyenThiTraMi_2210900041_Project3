@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col py-3">
           <a class="text-body" href="${pageContext.request.contextPath}/admin">
-            <h3><span class="badge bg-primary">Admin</span> Shop Bán Sách</h3>
+            <h3><span class="badge bg-primary">Admin</span> NHÀ SÁCH TRÍ TUỆ</h3>
           </a>
         </div> <!-- col.// -->
         <div class="col-sm-1">

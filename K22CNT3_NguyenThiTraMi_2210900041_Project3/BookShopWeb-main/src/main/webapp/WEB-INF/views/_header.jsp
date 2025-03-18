@@ -6,7 +6,7 @@
       <div class="row align-items-center">
         <div class="col-lg-3 py-3">
           <a class="text-body" href="${pageContext.request.contextPath}/">
-            <h3>Nhà sách trí tuệ</h3>
+            <h3 class = "text-danger">NHÀ SÁCH TRÍ TUỆ</h3>
           </a>
         </div> <!-- col.// -->
         <div class="col-lg-4 col-xl-5 ${empty sessionScope.currentUser ? 'mb-3 mb-lg-0' : ''}">

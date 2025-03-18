@@ -23,7 +23,7 @@ public class SettingServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("currentUser");
         request.setAttribute("user", user);
-        request.getRequestDispatcher("WEB-INF/views/settingView.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/web/user/settingView.jsp").forward(request, response);
     }
 
     @Override
@@ -66,6 +66,6 @@ public class SettingServlet extends HttpServlet {
             request.getSession().setAttribute("currentUser", newUser);
         }
 
-        request.getRequestDispatcher("WEB-INF/views/settingView.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/web/user/settingView.jsp").forward(request, response);
     }
 }

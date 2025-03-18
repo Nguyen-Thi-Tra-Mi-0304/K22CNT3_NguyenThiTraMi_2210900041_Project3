@@ -18,7 +18,7 @@ public class ChangePasswordServlet extends HomeServlet {
     private final UserService userService = new UserService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/changePasswordView.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/web/user/changePasswordView.jsp").forward(request, response);
     }
 
     @Override
@@ -44,6 +44,6 @@ public class ChangePasswordServlet extends HomeServlet {
             request.setAttribute("errorMessage", errorMessage);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/changePasswordView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/user/changePasswordView.jsp").forward(request, response);
     }
 }

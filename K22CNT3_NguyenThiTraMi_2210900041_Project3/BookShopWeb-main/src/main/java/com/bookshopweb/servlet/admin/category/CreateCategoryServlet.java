@@ -28,7 +28,7 @@ public class CreateCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/createCategoryView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/category/createCategoryView.jsp").forward(request, response);
     }
 
     @Override
@@ -65,6 +65,6 @@ public class CreateCategoryServlet extends HttpServlet {
             request.setAttribute("violations", violations);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/createCategoryView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/category/createCategoryView.jsp").forward(request, response);
     }
 }

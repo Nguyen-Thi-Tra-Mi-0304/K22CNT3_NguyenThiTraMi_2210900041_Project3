@@ -24,7 +24,7 @@ public class SigninAdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/signinAdminView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/signinAdminView.jsp").forward(request, response);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class SigninAdminServlet extends HttpServlet {
             } else {
                 String errorMessage = "Người dùng không có quyền đăng nhập Admin!";
                 request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("/WEB-INF/views/signinAdminView.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/admin/signinAdminView.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("values", values);
             request.setAttribute("violations", violations);
-            request.getRequestDispatcher("/WEB-INF/views/signinAdminView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/signinAdminView.jsp").forward(request, response);
         }
     }
 }

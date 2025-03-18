@@ -30,7 +30,7 @@ public class UpdateUserServlet extends HttpServlet {
             User user = userFromServer.get();
             user.setPassword("");
             request.setAttribute("user", user);
-            request.getRequestDispatcher("/WEB-INF/views/updateUserView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/user/updateUserView.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/userManager");
         }
@@ -117,6 +117,6 @@ public class UpdateUserServlet extends HttpServlet {
             request.setAttribute("violations", violations);
         }
 
-        request.getRequestDispatcher("/WEB-INF/views/updateUserView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/user/updateUserView.jsp").forward(request, response);
     }
 }

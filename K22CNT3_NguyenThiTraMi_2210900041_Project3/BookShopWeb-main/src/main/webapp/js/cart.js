@@ -30,6 +30,13 @@ const checkoutBtnElement = document.querySelector("#checkoutBtn");
 const deliveryMethodRadioElements = [...document.querySelectorAll("input[name='delivery-method']")];
 
 // COMPONENTS
+/* 1. Hiển thị một dòng sản phẩm trong giỏ hàng
+   2. Hiển thị giá sản phẩm và khuyến mãi
+   3. Bảng trong giỏ hàng
+   4. Hiển thị trạng thái tải
+*/
+
+// 1. Hiển thị một dòng sản phẩm trong giỏ hàng
 function cartItemRowComponent(props) {
   const {
     id,
@@ -75,6 +82,7 @@ function cartItemRowComponent(props) {
   `;
 }
 
+// 2. Hiển thị giá sản phẩm và khuyến mãi
 function cartItemPriceComponent(productPrice, productDiscount) {
   if (productDiscount === 0) {
     return `<span class="price">${_formatPrice(productPrice)}₫</span>`;
@@ -89,7 +97,9 @@ function cartItemPriceComponent(productPrice, productDiscount) {
   `;
 }
 
+// 3. Bảng trong giỏ hàng
 function cartTableComponent(cartItemRowComponentsFragment) {
+  // khi không có sản phẩm trong giỏ hàng
   if (state.cart.cartItems.length === 0) {
     return `
       <div class="d-flex justify-content-center p-5 font-monospace">
@@ -98,6 +108,7 @@ function cartTableComponent(cartItemRowComponentsFragment) {
     `;
   }
 
+   // khi có sản phẩm trong giỏ hàng
   return `
     <div class="table-responsive-xl">
       <table class="cart-table table table-borderless">
@@ -115,6 +126,7 @@ function cartTableComponent(cartItemRowComponentsFragment) {
   `;
 }
 
+// 4. Hiển thị trạng thái tải
 function loadingComponent() {
   return `
     <div class="d-flex justify-content-center p-5">
@@ -126,6 +138,14 @@ function loadingComponent() {
 }
 
 // UTILS
+/* 1. Gọi API lấy danh sách sản phẩm trong giỏ
+   2. Gọi API xóa sản phẩm trong giỏ
+   3. Gọi API cập nhật số lượng sản phẩm
+   4. Gọi API đặt hàng
+   5. Hàm định dạng giá tiền (VND)
+*/
+
+// 1. Gọi API lấy danh sách sản phẩm trong giỏ
 async function _fetchGetCart() {
   const response = await fetch(contextPathMetaTag.content + "/cartItem?userId=" + currentUserIdMetaTag.content, {
     method: "GET",
@@ -137,6 +157,7 @@ async function _fetchGetCart() {
   return [response.status, await response.json()];
 }
 
+// 2. Gọi API xóa sản phẩm trong giỏ
 async function _fetchDeleteCartItem(cartItemId) {
   const response = await fetch(contextPathMetaTag.content + "/cartItem?cartItemId=" + cartItemId, {
     method: "DELETE",
@@ -148,6 +169,7 @@ async function _fetchDeleteCartItem(cartItemId) {
   return [response.status, await response.json()];
 }
 
+// 3. Gọi API cập nhật số lượng sản phẩm
 async function _fetchUpdateCartItem(cartItemId, quantity) {
   const cartItemRequest = {
     quantity: quantity,
@@ -165,6 +187,7 @@ async function _fetchUpdateCartItem(cartItemId, quantity) {
   return [response.status, await response.json()];
 }
 
+// 4. Gọi API gửi yêu cầu đặt hàng tới server
 async function _fetchPostAddOrder() {
   const orderItems = state.cart.cartItems.map((cartItem) => ({
     productId: cartItem.productId,
@@ -193,6 +216,7 @@ async function _fetchPostAddOrder() {
   return [response.status, await response.json()];
 }
 
+// 5. Định dạng giá tiền (VND)
 function _formatPrice(price) {
   return new Intl.NumberFormat('vi-VN').format(price.toFixed());
 }
@@ -212,16 +236,19 @@ const initialOrder = {
 const state = {
   cart: { ...initialCart },
   order: { ...initialOrder },
+  // Hàm khởi tạo dữ liệu trong giỏ hàng (initState)
   initState: async () => {
     const [status, data] = await _fetchGetCart();
     if (status === 200) {
-      state.cart = data;
-      render();
+      state.cart = data; // lấy dữ liệu giỏ hàng từ server
+      render(); // Cập nhật lại giao diện
       attachEventHandlersForNoneRerenderElements();
     } else if (status === 404) {
       createToast(toastComponent(FAILED_OPERATION_MESSAGE, "danger"));
     }
   },
+
+  // Xóa sản phẩm khỏi giỏ hàng
   deleteCartItem: async (currentCartItem) => {
     if (confirm("Bạn có muốn xóa?")) {
       const [status] = await _fetchDeleteCartItem(currentCartItem.id);
@@ -235,6 +262,8 @@ const state = {
       }
     }
   },
+
+  // Cập nhật số lượng sản phẩm trong giỏ
   updateCartItem: async (currentCartItem, quantity) => {
     if (currentCartItem.quantity !== quantity) {
       const [status] = await _fetchUpdateCartItem(currentCartItem.id, quantity);
@@ -250,6 +279,8 @@ const state = {
       }
     }
   },
+
+  // Thanh toán
   checkoutCart: async () => {
     if (confirm("Bạn có muốn đặt hàng?")) {
       const [status] = await _fetchPostAddOrder();
@@ -264,6 +295,8 @@ const state = {
       }
     }
   },
+
+  // Thay đổi phương thức giao hàng
   changeDeliveryMethod: (deliveryMethodValue) => {
     if (state.order.deliveryMethod !== Number(deliveryMethodValue)) {
       state.order.deliveryMethod = deliveryMethodInputValues[deliveryMethodValue].deliveryMethod;
@@ -271,6 +304,8 @@ const state = {
       render();
     }
   },
+
+  // Tính giá tiền của sản phẩm  (giá * số lượng) - Giảm giá : (giá gốc * ( (100 - Discount) / 100) ) * số lượng
   getTempPrice: () => {
     return state.cart.cartItems
       .map((cartItem) => {
@@ -281,22 +316,26 @@ const state = {
       })
       .reduce((partialSum, productTotalPrice) => partialSum + productTotalPrice, 0);
   },
+
+  // Lấy phí vận chuyển
   getDeliveryPrice: () => state.order.deliveryPrice,
+
+  // Tính tổng tiền : giá tiền + phí vận chuyển
   getTotalPrice: () => state.getTempPrice() + state.getDeliveryPrice(),
 };
 
 // RENDER
 function render() {
-  // Render cartTableRootElement
+  // Render danh sách sản phẩm trong giỏ hàng
   const cartItemRowComponentsFragment = state.cart.cartItems.map(cartItemRowComponent).join("");
   cartTableRootElement.innerHTML = cartTableComponent(cartItemRowComponentsFragment);
 
-  // Render tempPriceRootElement, deliveryPriceRootElement, totalPriceRootElement
+  // Render tempPriceRootElement (giá tạm tính), deliveryPriceRootElement (phí giao hàng), totalPriceRootElement (tổng tiền)
   tempPriceRootElement.innerHTML = _formatPrice(state.getTempPrice());
   deliveryPriceRootElement.innerHTML = _formatPrice(state.getDeliveryPrice());
   totalPriceRootElement.innerHTML = _formatPrice(state.getTotalPrice());
 
-  // Render checkoutBtnElement, deliveryMethodRadioElements
+  // Kiểm tra khi giỏ hàng trống ( mặc định sẵn phương thức giao hàng)
   const isCartItemsEmpty = state.cart.cartItems.length === 0;
   checkoutBtnElement.disabled = isCartItemsEmpty;
   deliveryMethodRadioElements.forEach((radio) => {
@@ -304,13 +343,13 @@ function render() {
     radio.checked = radio.value === String(state.order.deliveryMethod);
   });
 
-  // Attach event handlers for delete cart item buttons
+  // Gắn sự kiện xóa sản phẩm
   state.cart.cartItems.forEach((cartItem) => {
     const deleteCartItemBtnElement = document.querySelector(`#delete-cart-item-${cartItem.id}`);
     deleteCartItemBtnElement.addEventListener("click", () => state.deleteCartItem(cartItem));
   });
 
-  // Attach event handlers for update cart item buttons
+  // Gắn sự kiện cập nhật sản phẩm
   state.cart.cartItems.forEach((cartItem) => {
     const updateCartItemBtnElement = document.querySelector(`#update-cart-item-${cartItem.id}`);
     updateCartItemBtnElement.addEventListener("click", () => {
@@ -319,6 +358,7 @@ function render() {
     });
   });
 }
+
 
 function attachEventHandlersForNoneRerenderElements() {
   // Attach event handlers for delivery method radios

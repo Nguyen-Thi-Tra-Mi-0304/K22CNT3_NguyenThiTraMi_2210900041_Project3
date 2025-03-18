@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Admin401Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/admin401View.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/admin401View.jsp").forward(request, response);
     }
 
     @Override

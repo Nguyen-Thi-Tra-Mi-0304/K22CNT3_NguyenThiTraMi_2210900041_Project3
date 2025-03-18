@@ -19,6 +19,7 @@ const SUCCESS_ADD_WISHLIST_ITEM_MESSAGE = (productTitle) =>
 const FAILED_ADD_WISHLIST_ITEM_MESSAGE = "Đã có lỗi truy vấn!";
 
 // UTILS
+// 1. Request thêm sản phẩm vào giỏ hàng
 async function _fetchPostAddCartItem() {
   const cartItemRequest = {
     userId: currentUserIdMetaTag.content,
@@ -38,6 +39,7 @@ async function _fetchPostAddCartItem() {
   return [response.status, await response.json()];
 }
 
+// 2. Request thêm sản phẩm vào danh sách yêu thích
 async function _fetchPutAddWishlistItem() {
   const wishlistItemRequest = {
     userId: currentUserIdMetaTag.content,
@@ -57,10 +59,12 @@ async function _fetchPutAddWishlistItem() {
 }
 
 // EVENT HANDLERS
+// 1. Xử lý sự kiện khi chưa đăng nhập
 function noneSigninEvent() {
   createToast(toastComponent(REQUIRED_SIGNIN_MESSAGE));
 }
 
+// 2. Xử lý sự kiện thêm vào danh sách yêu thích
 async function addWishlistItemBtnEvent() {
   const [status] = await _fetchPutAddWishlistItem();
   if (status === 200) {
@@ -72,6 +76,7 @@ async function addWishlistItemBtnEvent() {
   }
 }
 
+// 3. Xử lý sự kiện Mua ngay
 async function buyNowBtnEvent() {
   const [status] = await _fetchPostAddCartItem();
   if (status === 200) {
@@ -81,6 +86,7 @@ async function buyNowBtnEvent() {
   }
 }
 
+// 4. Xử lý sự kiện thêm vào giỏ hàng
 async function addCartItemBtnEvent() {
   const [status] = await _fetchPostAddCartItem();
   if (status === 200) {
@@ -92,7 +98,7 @@ async function addCartItemBtnEvent() {
   }
 }
 
-// MAIN
+// MAIN (Gán sự kiện cho các nút bấm được thiết kế trên giao diện)
 const addWishlistItemBtn = document.querySelector("#add-wishlist-item");
 const buyNowBtn = document.querySelector("#buy-now");
 const addCartItemBtn = document.querySelector("#add-cart-item");

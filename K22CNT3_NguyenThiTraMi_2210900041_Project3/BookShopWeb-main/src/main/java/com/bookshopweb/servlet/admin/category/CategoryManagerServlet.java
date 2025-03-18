@@ -17,7 +17,7 @@ import java.util.Optional;
 @WebServlet(name = "CategoryManagerServlet", value = "/admin/categoryManager")
 public class CategoryManagerServlet extends HttpServlet {
     private final  CategoryService categoryService = new CategoryService();
-    private static final int CATEGORIES_PER_PAGE = 5;
+    private static final int CATEGORIES_PER_PAGE = 7;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class CategoryManagerServlet extends HttpServlet {
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("page", page);
         request.setAttribute("categories", categories);
-        request.getRequestDispatcher("/WEB-INF/views/categoryManagerView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/category/categoryManagerView.jsp").forward(request, response);
     }
 
     @Override

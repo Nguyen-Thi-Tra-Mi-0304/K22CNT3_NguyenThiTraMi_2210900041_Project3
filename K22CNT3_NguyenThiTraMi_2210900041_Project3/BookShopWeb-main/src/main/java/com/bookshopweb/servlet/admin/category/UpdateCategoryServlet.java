@@ -34,7 +34,7 @@ public class UpdateCategoryServlet extends HttpServlet {
 
         if (categoryFromServer.isPresent()) {
             request.setAttribute("category", categoryFromServer.get());
-            request.getRequestDispatcher("/WEB-INF/views/updateCategoryView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/category/updateCategoryView.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/categoryManager");
         }
